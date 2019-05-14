@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginForm from './AuthContainer/LoginForm/LoginForm'
-import RegistrationForm from './AuthContainer/RegisterForm/RegisterForm';
-import Entries from './UserProfile/UserProfile';
-import {Switch, Route, Link } from 'react-router-dom';
+//mport { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import User from './UserContainer/UserContainer';
+//import {Switch, Route, Link } from 'react-router-dom';
 import AuthContainer from './AuthContainer/AuthContainer'
+
 
 
 class App extends Component {
@@ -16,12 +16,13 @@ class App extends Component {
       currentUser: null
     }
   }
-  handleLogin = async (formData) => {
-    console.log(formData)
+  
+  componentDidMount = () => {
+    //this.handleRegister()
+    //this.props.history.push('/')
   }
-
   handleRegister = async (formData) => {
-      const response = await fetch("http://localhost:9000", {
+      const newUserResponse = await fetch("http://localhost:9000/users", {
         method: "POST",
         body: JSON.stringify(formData),
         credentials: 'include',
@@ -29,17 +30,39 @@ class App extends Component {
             "Content-Type": "application/json"
         }
     })
-    const parsedResponse = await response.json();
+    const parsedResponse = await newUserResponse.json();
     console.log(parsedResponse);
     if(parsedResponse.status === 200){
         this.setState({
             loggedIn: true,
-            currentUser: parsedResponse.data
+            currentUser: parsedResponse.data.username
         })
     }
   }
-  handleLogin = async (formData) => {
-    console.log(formData)
+deleteUser = async (user, e) => {
+        console.log('delete hit')
+        console.log(user, 'this is user from delete container')
+        //e.preventDefault();
+
+        // console.log(user, 'id hereeeeeeeeeeeee')
+        // console.log(e, 'e hereeeeeeeeeeeee')
+        try {
+            const deleteUser = await fetch('http://localhost:9000/users/' + user.currentUser._id, {
+                method: 'DELETE',
+                credentials: 'include'
+              });
+        console.log(deleteUser, 'deleted userrrrrrrrr')
+              } catch (err){
+        console.log(err)
+        }
+        this.setState({
+            loggedIn: false,
+            currentUser: null
+        })
+        //currently if you delelete a user and make a new 
+        //one it will say this.state.username or whatever is undefined. Will try and fix later
+}
+handleLogin = async (formData) => {
     try {
       const loginResponse = await fetch("http://localhost:9000/login", {
         method: "POST",
@@ -50,15 +73,14 @@ class App extends Component {
         }
       })
       const parsedLoginResponse = await loginResponse.json();
-      console.log(parsedLoginResponse, 'parsed response here ...........');
 
       if(parsedLoginResponse.status === 200){
         this.setState({
           loggedIn: true,
           currentUser: parsedLoginResponse.data
+          // keeping current user as username during testing. 
+          // Will change to user _id when lanched to avoid showing password
         })
-        console.log(this.state, 'this state here ...........');
-
       } else {
         console.log("Username or Password does not exist")
       }
@@ -67,15 +89,25 @@ class App extends Component {
       console.log(err)
     }
   }
+  logout = async ()=> {
+    console.log('logout button wokring')
+    this.setState({
+      loggedIn: false,
+      currentUser: null
+    })
+  }
+  
   render () {
       return (
       <div className="App">
         <h1> Welcome to WanderLog! </h1>
         {this.state.loggedIn ?
-        <Entries/>
+        
+        <User deleteUser = {this.deleteUser} logout = {this.logout} currentUser = {this.state.currentUser}/>
       :  
       <AuthContainer handleLogin = {this.handleLogin} handleRegister = {this.handleRegister}/>
        }
+      
       </div>
   );
 }

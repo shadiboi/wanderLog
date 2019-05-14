@@ -34,7 +34,7 @@ app.use(session({
   const AuthController = require('./controllers/AuthController')
   app.use('/', AuthController);
 
-  const EntriesController = require('./controllers/AuthController')
+  const EntriesController = require('./controllers/EntriesController')
   app.use('/entries', EntriesController);
 
 

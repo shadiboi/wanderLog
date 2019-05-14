@@ -12,8 +12,11 @@ const entriesSchema = new mongoose.Schema({
         unique: false
     },
     description: String,
-    photos: [],
-    location: Number,
+    photo: '',
+    location: {
+        latitude: Number,
+        longitude: Number    
+    },
 })
 
 const Entries = mongoose.model('Entries', entriesSchema);

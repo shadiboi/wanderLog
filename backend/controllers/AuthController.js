@@ -5,27 +5,6 @@ const bcrypt = require('bcryptjs');
 
 
 
-//Register
-router.post("/", async (req, res)=>{
-    try{
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        req.body.password = hashedPassword;
-        const newUser = await User.create(req.body)
-        newUser.password = null;
-        req.session.userId = newUser._id;
-        res.json({
-            status: 200,
-            data: newUser
-        })
-    }catch(err){
-        console.log(err);
-        res.json({
-            status: 500,
-            data: err
-        })
-    }
-})
-
 //Login
 router.post('/login', async (req, res) => {
     try{
@@ -50,6 +29,14 @@ router.post('/login', async (req, res) => {
         console.log(err);
         res.send(err);
     }
+})
+
+//Logout
+router.post('/logout', (req, res) => {
+
+    req.session.logged = false;
+    req.session.destroy;
+
 })
 
 module.exports = router;
