@@ -12,11 +12,11 @@ const entriesSchema = new mongoose.Schema({
         unique: false
     },
     description: String,
-    photo: '',
-    location: {
-        latitude: Number,
-        longitude: Number    
-    },
+    photo: String,
+    latitude: Number,
+    longitude: Number,   
+    owner: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+
 })
 
 const Entries = mongoose.model('Entries', entriesSchema);

@@ -28,7 +28,7 @@ router.post("/", async (req, res)=>{
 router.get('/current', async (req, res, next) => {
     try  {
        const foundUser = await User.findById(req.session.username);
-        console.log(foundUser)
+        //console.log(foundUser)
        res.json({
          status: 200,
          data: foundUser
@@ -43,7 +43,7 @@ router.get('/current', async (req, res, next) => {
 router.get('/all', async (req,res,next) => {
   try {
     const allUsers = await User.find({});
-    console.log(allUsers, 'all usersssssssssssssss')
+    //console.log(allUsers, 'all usersssssssssssssss')
     res.json({
       status: 200,
       data: allUsers

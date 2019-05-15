@@ -31,7 +31,7 @@ class App extends Component {
         }
     })
     const parsedResponse = await newUserResponse.json();
-    console.log(parsedResponse);
+    //console.log(parsedResponse);
     if(parsedResponse.status === 200){
         this.setState({
             loggedIn: true,
@@ -96,7 +96,7 @@ handleLogin = async (formData) => {
       currentUser: null
     })
   }
-  
+
   render () {
       return (
       <div className="App">

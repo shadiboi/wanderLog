@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     password: String,
     email: String,
     entries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Entries'}]
-
 })
 
 const User = mongoose.model('User', userSchema);

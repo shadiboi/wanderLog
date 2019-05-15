@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
                 })         
             }
         }
-        console.log(req.session, 'sessions here<<<<<<<<<<<,')
+        //console.log(req.session, 'sessions here<<<<<<<<<<<,')
 
         res.send({
             status: 500,
