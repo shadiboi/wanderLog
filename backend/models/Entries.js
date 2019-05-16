@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const entriesSchema = new mongoose.Schema({
     title: {
         type: String, 
-        required: true, 
+        //required: true, 
         unique: false
     },
     date: {
         type: String, 
-        required: true, 
+       // required: true, 
         unique: false
     },
     description: String,

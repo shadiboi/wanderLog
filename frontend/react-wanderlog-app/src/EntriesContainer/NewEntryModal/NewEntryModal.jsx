@@ -3,17 +3,12 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Switch, Route, Link} from 'react-router-dom';
 
 
+
 class NewEntryModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        entries: {
-            title:'',
-            description: '',
-            date: '',
-            latitude: '',
-            longitude:''
-        },
+        entries: [],
         currentUser: ''
     };
 
@@ -21,7 +16,7 @@ class NewEntryModal extends React.Component {
 }
 componentDidMount = () => {
     this.getLocation();
-    this.getUser()
+
 }
 toggle() {
     this.setState(prevState => ({
@@ -36,21 +31,9 @@ handleChange = (e) => {
 }
 handleSubmit = (e) => {
     e.preventDefault();
-    this.newEntry(this.state);
+    this.props.newEntry(this.state);
 }
-getUser = async () => {
-    const currentUser = await fetch("http://localhost:9000/users/current", {
-        credentials: 'include'
-      })
-      const parsedResponse = await currentUser.json();
-     // console.log(parsedResponse, 'parsed resonse here bbiiiiiii')
-      if(parsedResponse.status === 200){
-        this.setState({
-          currentUser: parsedResponse.data._id,
-        })
-        // console.log(this.props, "props hereeeeeeeeee")
-      }
-}
+
 getLocation = async () => {
     await navigator.geolocation.getCurrentPosition((locationInfo) => {
         this.setState({
@@ -59,44 +42,7 @@ getLocation = async () => {
         })
     })
 }
-getLongitude = async () => {
-    await navigator.geolocation.getCurrentPosition((locationInfo) => {
-        return locationInfo.coords.longitude
-        // this.setState({
-        //     latitude: [...this.state.entries.latitude,locationInfo.coords.latitude] ,
-        //     longitude: [...this.state.entries.longitude,locationInfo.coords.longitude] 
-        // })
-    })
-}
-//MOVE TO CONTAINER
-newEntry = async (formData) => {
-    formData.latitude = this.state.latitude
-    formData.longitude = this.state.longitude
-    formData.owner = this.state.currentUser
-    console.log(formData, 'form data here')
-    const newEntry = await fetch("http://localhost:9000/entries", {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        credentials: 'include',
-        headers: {
-             "Content-Type": "application/json"
-        }
-    })
-    console.log(newEntry)
-    const parsedResponse = await newEntry.json();
-    console.log(parsedResponse , 'parsed response from new entry');
-//     if(parsedResponse.status === 200){
-//     this.setState({
-//         entires: {
-//             title:'',
-//             description: '',
-//             date: '',
-//             latitude: [],
-//             longitude:[]
-//         }
-//     })
-// }
-}
+
 
 render() {
 

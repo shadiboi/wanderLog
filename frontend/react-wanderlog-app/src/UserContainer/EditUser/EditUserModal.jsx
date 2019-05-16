@@ -29,7 +29,7 @@ class EditUserModal extends Component {
           e.preventDefault();
           this.props.editUser(this.state);
     }
-    
+
     getUser = async () => {
         const currentUser = await fetch("http://localhost:9000/users/current", {
             credentials: 'include'
@@ -46,7 +46,7 @@ class EditUserModal extends Component {
   
   
     render() {
-        console.log(this.state)
+        //console.log(this.state)
       return (
         <div>
           <Link onClick={this.toggle}>{this.props.buttonLabel}Edit User</Link>

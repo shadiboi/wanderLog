@@ -22,7 +22,7 @@ class AuthContainer extends Component {
     
     render(){
         return(
-            <div>
+            <div class = 'navBar'>
         <Nav>
             <NavLink href="#">Home</NavLink> <NavLink href="#">About</NavLink> <NavLink><LoginModal handleLogin = {this.props.handleLogin} />
             </NavLink> <NavLink> <RegisterModal handleRegister = {this.props.handleRegister} /></NavLink>
