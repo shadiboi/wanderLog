@@ -79,17 +79,9 @@ class User extends Component {
         return(
             <div>
               
-                <div class = "userInfo">
-                <h1> {'Welcome' + this.props.currentUser.username} </h1><br></br>
-                    {/* <h4> All User index (for testing)</h4>
-                    <ul> {allUsers}</ul> */}
-                </div>
-                 {/* <div class = "entries">
-                    <EntriesContainer currentUser = {this.props.currentUser}/> 
-                </div> */}
-                {/* <div class = "map">
-                    <MapContainer entries = {this.state.entries}/>
-                </div> */}
+              
+                <h1> {'Welcome' + this.props.currentUser.username + ', time to start logging!'} </h1>
+              
                
             </div>
         )

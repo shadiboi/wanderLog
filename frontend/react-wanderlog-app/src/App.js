@@ -112,7 +112,7 @@ handleLogin = async (formData) => {
   render () {
       return (
       <div className="App">
-        <h1> Welcome to WanderLog! </h1>
+       
       
         {this.state.loggedIn ?
          <div class = 'userProfile'>
@@ -122,10 +122,11 @@ handleLogin = async (formData) => {
              </NavLink> <NavLink href=""onClick= {this.logout}>Logout</NavLink>
          </Nav> 
          </div>
+         
         <User deleteUser = {this.deleteUser} logout = {this.logout} currentUser = {this.state.currentUser}/>
         
         <div  class='entries'>
-        <EntriesContainer class='entries, float-left'  getEntries = {this.getEntries} currentUser = {this.state.currentUser}/> 
+        <EntriesContainer class='entries'  getEntries = {this.getEntries} currentUser = {this.state.currentUser}/> 
         </div>
 
         <div class='map'>
@@ -134,8 +135,10 @@ handleLogin = async (formData) => {
 
         </div>
       :  
-      
+      <div class='authContainer'> 
+      <h1> Welcome to WanderLog! </h1>
       <AuthContainer handleLogin = {this.handleLogin} handleRegister = {this.handleRegister}/>
+      </div>
        }
       
       </div>
@@ -145,3 +148,16 @@ handleLogin = async (formData) => {
 
 
 export default App;
+
+
+{/* <Container>
+  <Row>
+    <Col sm={8}>sm=8</Col>
+    <Col sm={4}>sm=4</Col>
+  </Row>
+  <Row>
+    <Col sm>sm=true</Col>
+    <Col sm>sm=true</Col>
+    <Col sm>sm=true</Col>
+  </Row>
+</Container>; */}

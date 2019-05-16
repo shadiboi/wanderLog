@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 //import MapContainer from '../MapContainer/MapContainer';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, CardDeck, CardColumns} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewEntryModal from './NewEntryModal/NewEntryModal';
 import EditEntryModal from './EditEntryModal/EditEntryModal'
@@ -148,44 +148,43 @@ class EntriesContainer extends Component {
       console.log(err);
     }
 }
-deleteEntry = async () => {
-
+deleteEntry = async (entryToEdit) => {
+    
     try {
-        const deletedEntry = await fetch('http://localhost:9000/entries/' + this.state.currentUser._id, {
+        console.log(this.state)
+        const deletedEntry = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
             method: 'DELETE',
             credentials: 'include'
           });
         console.log(deletedEntry, 'deleted entryyyyyyyy')
         const deletedEntryJson = await deletedEntry.json();
-          console.log(deletedEntryJson)
+          console.log(deletedEntry)
           console.log('---------DELETED ENTRY-----------------------')
         this.setState({
-            userEntries: this.state.userEntries.filter(deletedEntryJson)
+            userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id)
         })
-        // this.setState({movies: this.state.movies.filter((movie, i) => movie._id !== id)});
+        this.getUserEntries();
         
     } catch (err){
         console.log(err)
-    }
-    //CHANGE STATE AFTER ENTRY IS DELETED
-    
+    }    
    
 }
     
     
     render(){
-        // console.log(this.state)
-        // console.log('----LOOK--------------')
 
         const userEntries = this.state.userEntries.map((entry, i) => {
             return (
                 <div key = {entry._id}>
-                <Card>
+                <CardColumns >
+                <Card >
                 <CardImg top width="20%" src={entry.photo} alt="Card image cap" />
                 <CardTitle>{entry.title}</CardTitle>
                 <CardText>{entry.description}</CardText>
                 <EditEntryModal deleteEntry={this.deleteEntry}  getEntryToEdit= {this.getEntryToEdit} editEntry= {this.editEntry} entries = {this.state.userEntries[i]} currentUser= {this.props.currentUser}/>
                 </Card>
+                </CardColumns>
                 </div>
             )   
         })

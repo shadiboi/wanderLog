@@ -13,13 +13,15 @@ code {
     monospace;
 }
 .map {
-  display: inline-block;
-  width: 40%;
-  margin-left: 2%;
+  float: right;
+  width: 50%;
+  background-color: green;
 }
 
 .entries {
-  display: inline-block;
+  float: left;
+  background-color: blue;
+  margin-right: 70%;
 
 }
 .navBar {

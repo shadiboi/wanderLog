@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Switch, Route, Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 class EditEntryModal extends React.Component {
@@ -59,9 +60,10 @@ return (
             Description: <input value = {this.state.entryToEdit.description} onChange={this.handleChange} type="text" name="description"/>
             <br></br>
             Photo (optional): <input value = {this.state.entryToEdit.photo} onChange={this.handleChange} type="text" name="photo"/>
-            <br></br>    
+            <br></br>
+
             <Button type = 'submit'color="primary" onClick={this.toggle}>Edit Entry</Button>{''} 
-            <Button color="danger" onClick={this.props.deleteEntry}>Delete Entry</Button>{' '} 
+            <Button color="danger" onClick={() => {this.props.deleteEntry(this.state.entryToEdit); this.toggle();}}>Delete Entry</Button>{' '} 
             </form>     
             </ModalBody>
 

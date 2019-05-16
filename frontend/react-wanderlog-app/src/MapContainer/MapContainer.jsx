@@ -9,7 +9,7 @@ class MapContainer extends Component {
       super();
       this.state = {
         currentUser: '',
-        entries:[]
+        userEntries:[]
       }
     }
    

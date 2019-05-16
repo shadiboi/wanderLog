@@ -84,7 +84,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     console.log('deleting user')
       try{
-          const deletedEntries = await Entries.deleteMany({ owner: { $in: [ req.params.id]}})
+          const deletedEntries = await Entries.findByIdAndDelete(req.params.id)
           console.log(deletedEntries, 'deleted entries bbrooooooooooooooo')
           res.json({
               status: 200,
