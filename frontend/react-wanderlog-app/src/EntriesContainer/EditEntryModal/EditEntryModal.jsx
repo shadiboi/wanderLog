@@ -20,10 +20,7 @@ class EditEntryModal extends React.Component {
 
     this.toggle = this.toggle.bind(this);
 }
-// componentDidMount = () => {
-//     console.log(this.props, "this props from edit entries")
 
-// }
 toggle() {
     this.setState(prevState => ({
         modal: !prevState.modal
@@ -48,7 +45,7 @@ render() {
 
 return (
         <div>
-        <Link onClick={this.toggle}>{this.props.buttonLabel}Edit Entry</Link>
+        <Link style={{textDecoration: 'none', color:'black'}} onClick={this.toggle}>{this.props.buttonLabel}Edit Entry</Link>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Edit Entry</ModalHeader>
             <ModalBody>

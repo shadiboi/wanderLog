@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Switch, Route, Link} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
 
 
 
@@ -17,7 +16,6 @@ class NewEntryModal extends React.Component {
 }
 componentDidMount = () => {
     this.getLocation();
-
 }
 toggle() {
     this.setState(prevState => ({
@@ -50,16 +48,16 @@ render() {
 
 return (
     <div>
-    <Link onClick={this.toggle}>{this.props.buttonLabel}New Entry</Link>
+    <Link style={{textDecoration: 'none', color:'white', fontSize: "20px", letterSpacing: '2px'}} onClick={this.toggle}>{this.props.buttonLabel}Create New Entry</Link>
     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-        <ModalHeader toggle={this.toggle}>New Entry</ModalHeader>
+        <ModalHeader toggle={this.toggle}>New Entry</ModalHeader><br></br>
         <ModalBody>
         <form onSubmit={this.handleSubmit}>
         Title: <input onChange={this.handleChange} type="text" name="title"/>
         <br></br>
         Date: <input onChange={this.handleChange} type="date" name="date"/>
         <br></br>
-        Description: <input onChange={this.handleChange} type="text" name="description"/>
+        Description: <input class='entryDescription' onChange={this.handleChange} type="text" name="description"/>
         <br></br>
         Photo (optional): <input onChange={this.handleChange} type="text" name="photo"/>
         <br></br>    

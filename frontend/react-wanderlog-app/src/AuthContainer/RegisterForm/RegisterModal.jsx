@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {Switch, Route, Link} from 'react-router-dom';
+const classNames = require('classnames');
 
 
 class RegisterModal extends React.Component {
@@ -34,17 +35,17 @@ class RegisterModal extends React.Component {
   render() {
     return (
       <div>
-        <Link onClick={this.toggle}>{this.props.buttonLabel}REGISTER</Link>
+        <Link  style={{textDecoration: 'none', color:'white' , letterSpacing: '2px'}} onClick={this.toggle}>{this.props.buttonLabel}REGISTER</Link>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Register</ModalHeader>
           <ModalBody>
           <form onSubmit={this.handleSubmit}>
             Username: <input onChange={this.handleChange} type="text" name="username"/>
-            <br></br>
+            <br></br>  <br></br>
             Password: <input onChange={this.handleChange} type="password" name="password"/>
-            <br></br>
+            <br></br>  <br></br>
             Email: <input onChange={this.handleChange} type="email" name="email"/>
-            <br></br>
+            <br></br>  <br></br>
             <Button type = 'submit'color="primary" onClick={this.toggle}>Register</Button>  </form>         
             </ModalBody>
             

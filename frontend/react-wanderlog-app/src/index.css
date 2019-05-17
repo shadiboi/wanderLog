@@ -12,21 +12,60 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.map {
-  float: right;
-  width: 50%;
-  background-color: green;
+
+.navBar {
+ text-align: center;
+ position: relative;
+ margin-left: 40%;
+ margin-bottom: -2%;
+}
+.authContainer{
+  background-color:skyblue;
+  margin: 100px;
+}
+.navBarAuth {
+  text-align: center;
+  position: relative;
+  margin-left: 44%;
+ }
+.jumbotron {
+  margin-right: 20%;
+  margin-left: -50%;
+}
+h1 {
+  text-align: center;
+  font-family: 'Gaegu', cursive;
+
 }
 
 .entries {
-  float: left;
-  background-color: blue;
-  margin-right: 70%;
-
-}
-.navBar {
-  margin-left: 40%;
+ display: block;
+ margin-top: 45%;
+ background-color: skyblue;
 }
 
-
+.user {
+  position: auto;
+}
+.authContainer {
+  margin-top: 10%;
+}
+.map {
+  display: skyblue;
+  margin: auto;
+  padding: 20px;
+  margin-left: 18%;
+  margin-bottom: -5%;
+}
+a {
+  text-decoration: none;
+}
+#title {
+  margin-top: 2%;
+  font-size: 60px;
+  color: skyblue;
+}
+.profile {
+  background-color: black;
+}
 

@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 //mport { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import User from './UserContainer/UserContainer';
-//import {Switch, Route, Link } from 'react-router-dom';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import {Switch, Route, Link } from 'react-router-dom';
+import { Nav, NavItem, NavLink, Container, Row, Col} from 'reactstrap';
 import AuthContainer from './AuthContainer/AuthContainer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EntriesContainer from './EntriesContainer/EntiresContainer';
@@ -95,7 +95,7 @@ handleLogin = async (formData) => {
           // Will change to user _id when lanched to avoid showing password
         })
       } else {
-        console.log("Username or Password does not exist")
+        alert("Username or Password does not exist")
       }
 
     } catch(err){
@@ -108,6 +108,34 @@ handleLogin = async (formData) => {
       currentUser: ''
     })
   }
+  editUser = async () => {
+ 
+    try {
+
+      const editedUser = await fetch('http://localhost:9000/users/' + this.state.currentUser._id, {
+        method: 'PUT',
+        credentials: 'include',
+        body: JSON.stringify(editedUser),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      
+      const parsedResponse = await editedUser.json();
+      console.log(parsedResponse)
+       editedUser = this.state.currentUser
+
+
+      this.setState({
+        currentUser: editedUser
+      });
+
+
+    }catch(err){
+      console.log(err);
+    }
+
+}
 
   render () {
       return (
@@ -115,30 +143,42 @@ handleLogin = async (formData) => {
        
       
         {this.state.loggedIn ?
-         <div class = 'userProfile'>
-         <div class= 'navBar' > 
-         <Nav>
-         <NavLink href="#">Home</NavLink> <NavLink href="#"> <EditUserModal allUsers = {this.state.allUsers} currentUser = {this.state.currentUser} deleteUser= {this.deleteUser}/>
-             </NavLink> <NavLink href=""onClick= {this.logout}>Logout</NavLink>
-         </Nav> 
-         </div>
-         
-        <User deleteUser = {this.deleteUser} logout = {this.logout} currentUser = {this.state.currentUser}/>
+      <div class = "profile" > 
+        <Container>
+        <h1 id='title'> WanderLog</h1>
+        <div class= 'navBar' > 
+              <Row>
+                <Col>
+                <Nav>
+                <NavLink  href="#"> <EditUserModal  editUser={this.editUser} allUsers = {this.state.allUsers} currentUser = {this.state.currentUser} deleteUser= {this.deleteUser}/>
+                    </NavLink> <NavLink style={{textDecoration: 'none', color:'white'}} href=""onClick= {this.logout}>Logout</NavLink>
+                </Nav> 
+                </Col>
+              </Row>
+        </div>
+
         
-        <div  class='entries'>
-        <EntriesContainer class='entries'  getEntries = {this.getEntries} currentUser = {this.state.currentUser}/> 
+        <div class = 'user'>
+              <User deleteUser = {this.deleteUser} logout = {this.logout} currentUser = {this.state.currentUser}/>
         </div>
-
         <div class='map'>
-        <MapContainer class='entries, float-right'   entries = {this.state.entries} currentUser = {this.state.currentUser}/>
+              <MapContainer  entries = {this.state.entries} currentUser = {this.state.currentUser}/>
+        </div>
+   
+        <div class='entries'>
+              <EntriesContainer   getEntries = {this.getEntries} currentUser = {this.state.currentUser}/> 
         </div>
 
-        </div>
+        </Container>
+       
+      </div> 
       :  
+      <div class='loginPage'>
       <div class='authContainer'> 
-      <h1> Welcome to WanderLog! </h1>
+     
       <AuthContainer handleLogin = {this.handleLogin} handleRegister = {this.handleRegister}/>
       </div>
+      </div> 
        }
       
       </div>

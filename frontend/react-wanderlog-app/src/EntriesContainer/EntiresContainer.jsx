@@ -170,21 +170,21 @@ deleteEntry = async (entryToEdit) => {
     }    
    
 }
-    
-    
+       
     render(){
 
         const userEntries = this.state.userEntries.map((entry, i) => {
             return (
                 <div key = {entry._id}>
-                <CardColumns >
-                <Card >
-                <CardImg top width="20%" src={entry.photo} alt="Card image cap" />
-                <CardTitle>{entry.title}</CardTitle>
-                <CardText>{entry.description}</CardText>
-                <EditEntryModal deleteEntry={this.deleteEntry}  getEntryToEdit= {this.getEntryToEdit} editEntry= {this.editEntry} entries = {this.state.userEntries[i]} currentUser= {this.props.currentUser}/>
-                </Card>
-                </CardColumns>
+            
+                    <Card class= 'entries-card'>
+                        <CardImg top width="100%" src={entry.photo} alt="No photo uploaded. Edit now to add!" />
+                        <h2>{entry.title}</h2>
+                        <h6>{entry.date}</h6>
+                        <CardText>{entry.description}</CardText>
+                        <EditEntryModal deleteEntry={this.deleteEntry}  getEntryToEdit= {this.getEntryToEdit} editEntry= {this.editEntry} entries = {this.state.userEntries[i]} currentUser= {this.props.currentUser}/>
+                    </Card>
+           
                 </div>
             )   
         })
@@ -195,7 +195,8 @@ deleteEntry = async (entryToEdit) => {
             <Card>
                 <CardBody>
                     <CardTitle>{entries.title} </CardTitle> 
-                    <CardText> Lat:<li>  {entries.latitude} </li> 
+                    <CardText> 
+                    Lat:<li>  {entries.latitude} </li> 
                     Long:<li>  {entries.longitude} </li>
                     </CardText>
                 <Button/>
@@ -207,14 +208,16 @@ deleteEntry = async (entryToEdit) => {
        
         return(
             <div>
-                <NewEntryModal  currentUser = {this.props.currentUser} newEntry={this.newEntry}/>
-               <h1>{this.state.currentUser.username + "'s"+ ' Entries'}</h1>
-                   {userEntries}
+               <h2 >{this.state.currentUser.username + "'s"+ ' Entries'}</h2>
+               <NewEntryModal  currentUser = {this.props.currentUser} newEntry={this.newEntry}/>
+
+               <div className="entries-list">
+                {userEntries}
+               </div>
+                   
                     {/* <h1>all entries </h1>
                     <ul>{allEntries}</ul>  */}
-                    
-               
-              
+     
             </div>
         )
     }

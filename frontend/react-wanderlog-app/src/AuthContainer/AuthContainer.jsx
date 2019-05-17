@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import LoginForm from './LoginForm/LoginForm';
 // import RegistrationForm from './RegisterForm/RegisterForm';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Jumbotron, Container } from 'reactstrap';
 import {Switch, Route, Link} from 'react-router-dom';
 import LoginModal from './LoginForm/LoginModal';
 import RegisterModal from './RegisterForm/RegisterModal'
@@ -22,13 +22,23 @@ class AuthContainer extends Component {
     
     render(){
         return(
-            <div class = 'navBar'>
+            <div class = 'authContainer'>
+      
+            <div class = 'navBarAuth'>
         <Nav>
-            <NavLink href="#">Home</NavLink> <NavLink href="#">About</NavLink> <NavLink><LoginModal handleLogin = {this.props.handleLogin} />
+            <NavLink><LoginModal handleLogin = {this.props.handleLogin} />
             </NavLink> <NavLink> <RegisterModal handleRegister = {this.props.handleRegister} /></NavLink>
         </Nav>  
 
-       
+        <Jumbotron class = 'jumbotron'>
+                <Container>
+                    <h1>Welcome to WanderLog! </h1>
+                    <h5> Your personal online travel journal </h5><br></br>
+                     <p> Keeping track of your journal logs has never been so easy!<br></br> WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map. </p>
+
+                </Container>
+        </Jumbotron>;
+            </div>
             </div>
         )
     }

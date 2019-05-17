@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-import { Nav, NavItem, NavLink } from 'reactstrap';
-import EditUserModal from './EditUser/EditUserModal';
-import NewEntryModal from '../EntriesContainer/NewEntryModal/NewEntryModal'
-import MapContainer from '../MapContainer/MapContainer';
-import EntriesContainer from '../EntriesContainer/EntiresContainer'
+import { Nav, NavItem, NavLink, Link } from 'reactstrap';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -20,24 +17,9 @@ class User extends Component {
     }
     
     componentDidMount(){
-        // this.getCurrentUser();
         this.getAllUsers();
         this.getUserEntries();
     }
-
-    // getCurrentUser = async () => {
-    //     const currentUser = await fetch("http://localhost:9000/users/current", {
-    //         credentials: 'include'
-    //       })
-    //       const parsedResponse = await currentUser.json();
-    //      // console.log(parsedResponse, 'parsed resonse here bbiiiiiii')
-    //       if(parsedResponse.status === 200){
-    //         this.setState({
-    //           currentUser: parsedResponse.data,
-    //         })
-    //         // console.log(this.props, "props hereeeeeeeeee")
-    //       }
-    // }
 
     getAllUsers = async () => {
         const allUsers = await fetch('http://localhost:9000/users/all', {
@@ -58,15 +40,14 @@ class User extends Component {
             credientials: 'include'
         })
         const parsedResponse = await userEntries.json();
-        //console.log(parsedResponse, 'parsed resp>>>>>>>>>>>>>>>>>>>>')
         if(parsedResponse.status === 200){
             this.setState({
               entries: parsedResponse.data
             })
            }  
-           //console.log(this.state.entries, 'check this out!!!!!')
 
     }
+ 
 
     render(){
         const allUsers = this.state.allUsers.map((users)=> {
@@ -79,10 +60,8 @@ class User extends Component {
         return(
             <div>
               
+                <h1>  </h1>
               
-                <h1> {'Welcome' + this.props.currentUser.username + ', time to start logging!'} </h1>
-              
-               
             </div>
         )
     }

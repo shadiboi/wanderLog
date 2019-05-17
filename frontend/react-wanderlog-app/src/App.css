@@ -31,3 +31,10 @@
     transform: rotate(360deg);
   }
 }
+
+.map div {
+  max-height: 50vh;
+}
+a {
+  text-decoration: none;
+}

@@ -32,15 +32,15 @@ class LoginModal extends React.Component {
 
   render() {
     return (
-      <div>
-        <Link color="danger" onClick={this.toggle}>{this.props.buttonLabel}LOGIN</Link>
+      <div class= 'loginBtn'>
+        <Link style={{textDecoration: 'none', color:'white' , letterSpacing: '2px'}}  onClick={this.toggle}>{this.props.buttonLabel}LOGIN</Link>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
                 <form onSubmit={this.handleSubmit}>
                   Username: <input onChange={this.handleChange} value={this.state.username} type="text" name="username"/>
-                  <br></br>
-                  Password: <input onChange={this.handleChange} value={this.state.password} type="password" name="password"/><br></br>
+                  <br></br>  <br></br>
+                  Password: <input onChange={this.handleChange} value={this.state.password} type="password" name="password"/><br></br>  <br></br>
                   <Button type = 'submit'color="primary" onClick={this.toggle}>Login</Button>{' '}
                     </form>          
             </ModalBody>
