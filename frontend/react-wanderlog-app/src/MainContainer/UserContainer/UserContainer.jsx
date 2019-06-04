@@ -21,13 +21,12 @@ class User extends Component {
         this.getUserEntries();
     }
 
+    //WILL USE FOR PUBLIC ENTRIES SHOW BROWSE PAGE
     getAllUsers = async () => {
         const allUsers = await fetch('http://localhost:9000/users/all', {
             credentials: 'include'
           })
           const parsedResponse = await allUsers.json();
-          //console.log(parsedResponse, 'all users parsed resp')
-
           if(parsedResponse.status === 200){
             this.setState({
               allUsers: parsedResponse.data

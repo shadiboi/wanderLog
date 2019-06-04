@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {Switch, Route, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 class EditUserModal extends Component {
     constructor(){
@@ -42,14 +42,13 @@ class EditUserModal extends Component {
           }
     }
   
-  
     render() {
       return (
         <div>
-          <Link style={{textDecoration: 'none', color:'white'}} onClick={this.toggle}>{this.props.buttonLabel}Edit Account</Link>
-          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <Link style={{textDecoration: 'none'}} onClick={this.toggle}>{this.props.buttonLabel}Edit Account</Link>
+          <Modal  style={{maxWidth: '50vh'}} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Edit Account</ModalHeader>
-                <ModalBody>
+                <ModalBody  >
                   <form onSubmit={this.handleSubmit}>
                   Username: <input value ={this.props.currentUser.username} type="text" name="username"/>
                   <br></br>

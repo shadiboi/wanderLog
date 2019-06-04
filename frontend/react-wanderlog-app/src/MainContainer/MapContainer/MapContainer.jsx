@@ -1,21 +1,26 @@
 import React, {Component} from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EditEntryModal from '../EntriesContainer/EditEntryModal/EditEntryModal'
 
 
 class MapContainer extends Component {
-    constructor(){
-      super();
+    constructor(props){
+      super(props);
       this.state = {
         currentUser: '',
-        userEntries:[],
+        userEntries: props.userEntries,
         showingInfoWindow: false,
         activeMarker: {},
         selectedPlace: {},
       }
     }
 
+
+  getEntries = (entries) => {
+      this.setState({
+        userEntries: entries
+      })
+  }
 
   onMarkerClick = (props, marker, e) =>{
   this.setState({
@@ -24,20 +29,22 @@ class MapContainer extends Component {
     showingInfoWindow: true
   });
   }
-onMapClicked = (props) => {
-  if (this.state.showingInfoWindow) {
-    this.setState({
-      showingInfoWindow: false,
-      activeMarker: null
-    })
-  }
-};
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
+
   render() {
 
     const {google} = this.props;
 
    console.log(this.state.activeMarker.name)
-    const entriesList = this.props.entries.map((entry) => {   
+    const entriesList = this.props.userEntries.map((entry) => {   
       
      return (
        <Marker 
@@ -56,9 +63,16 @@ onMapClicked = (props) => {
      
      )
    })
+   const style = {
+    width: '100vh',
+    height: '50vh',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: "5%"
+  }
 
     return (
-         <Map style= {{width: "650px", height: "400px", display: 'block'}}  onClick={this.onMapClicked} google={this.props.google} zoom={10}  initialCenter={{
+         <Map style= {style}  onClick={this.onMapClicked} google={this.props.google} zoom={10}  initialCenter={{
           lat: 39.735354099999995,
           lng: -104.962317
         }}>

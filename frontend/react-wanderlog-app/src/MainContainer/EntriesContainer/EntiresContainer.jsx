@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-//import MapContainer from '../MapContainer/MapContainer';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, CardDeck, CardColumns} from 'reactstrap';
+import { CardGroup,Row, Col, Card, CardImg, CardText, CardBody, CardTitle,  Button} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewEntryModal from './NewEntryModal/NewEntryModal';
 import EditEntryModal from './EditEntryModal/EditEntryModal'
@@ -68,7 +67,6 @@ class EntriesContainer extends Component {
         })
     }
     getUserEntries = async () => {
-        //console.log(this.props.currentUser._id, 'chekc this bitch out>>>>>>>>>>>>>>>>.')
         const userEntries = await fetch('http://localhost:9000/entries/' + this.props.currentUser._id, {
             method: 'GET',
             credientials: 'include'
@@ -80,111 +78,106 @@ class EntriesContainer extends Component {
             })
            } 
            this.props.getEntries(this.state.userEntries)
- 
     }
    
     newEntry = async (formData) => {
-        formData.latitude = this.state.latitude
-        formData.longitude = this.state.longitude
-        formData.owner = this.props.currentUser
-        //console.log(formData, 'form data here')
-        const newEntry = await fetch("http://localhost:9000/entries", {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        console.log('the new one', newEntry)
-        const parsedResponse = await newEntry.json();
-        console.log('parsed new one', parsedResponse)
-        //console.log(parsedResponse , 'parsed response from new entry');
-        if(parsedResponse.status === 200){
-          this.setState({
-                userEntries: [...this.state.userEntries, parsedResponse.data]
+            formData.latitude = this.state.latitude
+            formData.longitude = this.state.longitude
+            formData.owner = this.props.currentUser
+            const newEntry = await fetch("http://localhost:9000/entries", {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json"
+                }
             })
-        this.getUserEntries();
-    }
+            const parsedResponse = await newEntry.json();
+            if(parsedResponse.status === 200){
+            this.setState({
+                    userEntries: [...this.state.userEntries, parsedResponse.data]
+                })
+            this.getUserEntries();
+        }
     }
  
 
     editEntry = async (entryToEdit)  => {
-    //    e.preventDefault();
-    //    console.log(entryToEdit)   
-    //    console.log('-------------STATE-----------------')
-       
-    try {
+ 
+        try {
 
-      const editedResponse = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
-        method: 'PUT',
-        credentials: 'include',
-        body: JSON.stringify(entryToEdit),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      
-      const parsedResponse = await editedResponse.json();
-      console.log(parsedResponse)
-      const editedEntriesArray = this.state.userEntries.map((entry) => {
-            console.log(entry)
-      if(entry._id === entryToEdit.id){
-
-            entry = parsedResponse.data;
-
-        }
-
-        return entry
-      });
-
-
-      this.setState({
-        userEntries: editedEntriesArray
-      });
-
-
-    }catch(err){
-      console.log(err);
-    }
-}
-deleteEntry = async (entryToEdit) => {
-    
-    try {
-        console.log(this.state)
-        const deletedEntry = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
-            method: 'DELETE',
-            credentials: 'include'
-          });
-        console.log(deletedEntry, 'deleted entryyyyyyyy')
-        const deletedEntryJson = await deletedEntry.json();
-          console.log(deletedEntry)
-          console.log('---------DELETED ENTRY-----------------------')
-        this.setState({
-            userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id)
+        const editedResponse = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify(entryToEdit),
+            headers: {
+            'Content-Type': 'application/json'
+            }
         })
-        this.getUserEntries();
         
-    } catch (err){
-        console.log(err)
-    }    
-   
-}
+        const parsedResponse = await editedResponse.json();
+        const editedEntriesArray = this.state.userEntries.map((entry) => {
+        if(entry._id === entryToEdit.id){
+
+                entry = parsedResponse.data;
+
+            }
+            return entry
+        });
+        this.setState({
+            userEntries: editedEntriesArray
+        });
+        }catch(err){
+        console.log(err);
+        }
+    }
+
+    deleteEntry = async (entryToEdit) => {
+        
+        try {
+            console.log(this.state)
+            const deletedEntry = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
+            console.log(deletedEntry, 'deleted entryyyyyyyy')
+            const deletedEntryJson = await deletedEntry.json();
+            console.log(deletedEntry)
+            console.log('---------DELETED ENTRY-----------------------')
+            this.setState({
+                userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id)
+            })
+            this.getUserEntries();
+            
+        } catch (err){
+            console.log(err)
+        }    
+    
+    }
        
     render(){
 
         const userEntries = this.state.userEntries.map((entry, i) => {
+            console.log(entry)
+            console.log(i)
+
             return (
+             
                 <div key = {entry._id}>
-            
-                    <Card class= 'entries-card'>
-                        <CardImg top width="100%" src={entry.photo} alt="No photo uploaded. Edit now to add!" />
-                        <h2>{entry.title}</h2>
-                        <h6>{entry.date}</h6>
-                        <CardText>{entry.description}</CardText>
-                        <EditEntryModal deleteEntry={this.deleteEntry}  getEntryToEdit= {this.getEntryToEdit} editEntry= {this.editEntry} entries = {this.state.userEntries[i]} currentUser= {this.props.currentUser}/>
-                    </Card>
-           
+                <Row>
+                    <Col sm='6'>
+                        <CardGroup>
+                            <Card class= 'entries-card'>
+                                <CardImg top width="100%" src={entry.photo} alt="No photo available. Click 'Edit Entry' add" />
+                                <h2>{entry.title}</h2>
+                                <h6>{entry.date}</h6>
+                                <CardText>{entry.description}</CardText>
+                                <EditEntryModal deleteEntry={this.deleteEntry}  getEntryToEdit= {this.getEntryToEdit} editEntry= {this.editEntry} entries = {this.state.userEntries[i]} currentUser= {this.props.currentUser}/>
+                            </Card>
+                        </CardGroup>
+                    </Col>
+                </Row>
+                      
                 </div>
             )   
         })
@@ -210,14 +203,9 @@ deleteEntry = async (entryToEdit) => {
             <div>
                <h2 >{this.state.currentUser.username + "'s"+ ' Entries'}</h2>
                <NewEntryModal  currentUser = {this.props.currentUser} newEntry={this.newEntry}/>
-
                <div className="entries-list">
                 {userEntries}
                </div>
-                   
-                    {/* <h1>all entries </h1>
-                    <ul>{allEntries}</ul>  */}
-     
             </div>
         )
     }

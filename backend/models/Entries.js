@@ -15,8 +15,7 @@ const entriesSchema = new mongoose.Schema({
     photo: String,
     latitude: Number,
     longitude: Number,   
-    owner: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-
+    owner: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 })
 
 const Entries = mongoose.model('Entries', entriesSchema);

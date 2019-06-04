@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {Switch, Route, Link} from 'react-router-dom';
+import { Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import { Link} from 'react-router-dom';
 
 class LoginModal extends React.Component {
   constructor(props) {
@@ -33,8 +33,8 @@ class LoginModal extends React.Component {
   render() {
     return (
       <div class= 'loginBtn'>
-        <Link style={{textDecoration: 'none', color:'white' , letterSpacing: '2px'}}  onClick={this.toggle}>{this.props.buttonLabel}LOGIN</Link>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Link style={{textDecoration: 'none', letterSpacing: '2px'}}  onClick={this.toggle}>{this.props.buttonLabel}LOGIN</Link>
+        <Modal style={{maxWidth: '50vh'}} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
           <ModalBody>
                 <form onSubmit={this.handleSubmit}>
