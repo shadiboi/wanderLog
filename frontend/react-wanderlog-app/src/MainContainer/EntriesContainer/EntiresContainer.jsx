@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { CardGroup,Row, Col, Card, CardImg, CardText, CardBody, CardTitle,  Button} from 'reactstrap';
+import { UncontrolledAlert ,CardGroup,Row, Col, Card, CardImg, CardText, CardBody, CardTitle,  Button} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewEntryModal from './NewEntryModal/NewEntryModal';
 import EditEntryModal from './EditEntryModal/EditEntryModal'
@@ -14,7 +14,8 @@ class EntriesContainer extends Component {
             currentUser: props.currentUser,
             allEntries: [],
             userEntries: [], 
-            editedEntriesArray: [],
+            // editedEntriesArray: [],
+            // allEditedEntriesArray: [],
             latitude: '',
             longitude: '',
             entryToEdit: {
@@ -57,6 +58,7 @@ class EntriesContainer extends Component {
               allEntries: parsedResponse.data
             })
            }  
+           this.props.getAllEntries(this.state.allEntries)
     }
     getLocation = async () => {
         await navigator.geolocation.getCurrentPosition((locationInfo) => {
@@ -84,6 +86,7 @@ class EntriesContainer extends Component {
             formData.latitude = this.state.latitude
             formData.longitude = this.state.longitude
             formData.owner = this.props.currentUser
+            console.log(formData, "FORM DATA<<<<<<<<<<<<<<<<<<")
             const newEntry = await fetch("http://localhost:9000/entries", {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -95,9 +98,12 @@ class EntriesContainer extends Component {
             const parsedResponse = await newEntry.json();
             if(parsedResponse.status === 200){
             this.setState({
-                    userEntries: [...this.state.userEntries, parsedResponse.data]
+                    userEntries: [...this.state.userEntries, parsedResponse.data],
+                    allEntries: [...this.state.allEntries, parsedResponse.data]
                 })
             this.getUserEntries();
+            this.props.getAllEntries(this.state.allEntries)
+
         }
     }
  
@@ -124,9 +130,22 @@ class EntriesContainer extends Component {
             }
             return entry
         });
-        this.setState({
-            userEntries: editedEntriesArray
+
+        const allEditedEntriesArray = this.state.allEntries.map((entry) => {
+            if(entry._id === entryToEdit.id){
+    
+                    entry = parsedResponse.data;
+    
+                }
+                return entry
         });
+        console.log(editedEntriesArray)
+        this.setState({
+            userEntries: editedEntriesArray,
+            allEntries: allEditedEntriesArray
+        });
+        this.props.getAllEntries(this.state.allEntries);
+        this.getUserEntries();
         }catch(err){
         console.log(err);
         }
@@ -145,9 +164,11 @@ class EntriesContainer extends Component {
             console.log(deletedEntry)
             console.log('---------DELETED ENTRY-----------------------')
             this.setState({
-                userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id)
+                userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id),
+                allEntries: this.state.allEntries.filter((entry) => entry._id !== entryToEdit.id)
             })
             this.getUserEntries();
+            this.getAllEntries();
             
         } catch (err){
             console.log(err)
@@ -158,9 +179,7 @@ class EntriesContainer extends Component {
     render(){
 
         const userEntries = this.state.userEntries.map((entry, i) => {
-            console.log(entry)
-            console.log(i)
-
+           
             return (
              
                 <div key = {entry._id}>
@@ -201,8 +220,11 @@ class EntriesContainer extends Component {
        
         return(
             <div>
-               <h2 >{this.state.currentUser.username + "'s"+ ' Entries'}</h2>
+               <h2 class='user-title' >{this.state.currentUser.username + "'s"+ ' Entries'}</h2>
                <NewEntryModal  currentUser = {this.props.currentUser} newEntry={this.newEntry}/>
+                    <UncontrolledAlert style={{width: '45%'}} color="danger">
+                        <h6 >Don't forget your daily log!</h6>
+                     </UncontrolledAlert>
                <div className="entries-list">
                 {userEntries}
                </div>

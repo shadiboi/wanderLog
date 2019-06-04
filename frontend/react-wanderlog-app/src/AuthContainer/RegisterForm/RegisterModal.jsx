@@ -35,7 +35,7 @@ class RegisterModal extends React.Component {
   render() {
     return (
       <div>
-        <Link  style={{textDecoration: 'none', letterSpacing: '2px'}} onClick={this.toggle}>{this.props.buttonLabel}REGISTER</Link>
+        <Link  style={{textDecoration: 'none', letterSpacing: '1px', color:'grey'}} onClick={this.toggle}>{this.props.buttonLabel}REGISTER</Link>
         <Modal  style={{maxWidth: '50vh'}}  isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Register</ModalHeader>
           <ModalBody>

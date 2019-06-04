@@ -8,35 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class ExploreContainer extends Component {
-    constructor (props){
-        super(props);
-        this.state = {
-          allEntries: []
-        }
-    }
-
-    componentDidMount = () => {
-        this.getAllEntries()
-    }
-
-    getAllEntries = async () => {
-        const allEntries = await fetch('http://localhost:9000/entries', {
-            method: 'GET',
-            credentials: 'include'
-          })
-          const parsedResponse = await allEntries.json();
-
-          if(parsedResponse.status === 200){
-            await this.setState({
-              allEntries: parsedResponse.data
-            })
-           }  
-    }
+ 
   
 
     render(){
-        const allEntries = this.state.allEntries.map((entries)=> {
+        let allEntries = this.props.allEntries.filter((entries) => entries.public).map((entries, i)=> {
+
             console.log(entries,'<<<<<<<<<<<<ENTRIES<<<<<<<<,,,')
+            
             return (
             <div key = {entries._id}>
             <Row>
@@ -48,7 +27,7 @@ class ExploreContainer extends Component {
                             <h6>{entries.date}</h6>
                             <CardText>{entries.description}</CardText>
                             <p>Author: {
-                                entries.owner
+                                entries.owner.username
                             }</p>
                         </Card>
                     </CardGroup>
@@ -58,10 +37,10 @@ class ExploreContainer extends Component {
             
             )
         })
-        
+       
         return(
             <div >
-              <h1>WanderLog Community</h1>
+              <h1 class='explore-title'>WanderLog Community</h1>
                {allEntries}
               
             </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Jumbotron, Container } from 'reactstrap';
+import { Jumbotron, Container ,Button} from 'reactstrap';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import {
   Carousel,
@@ -93,30 +93,33 @@ class AuthContainer extends Component {
             );
           });
         return(
-          <div>
+          <div >
+            <div class='authNav' >
              <Navbar color="faded" light>
                 <NavbarBrand href="/" className="mr-auto">Wander Log</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>
                         <NavItem>
-                            <NavLink><LoginModal handleLogin = {this.props.handleLogin} /></NavLink>
+                            <NavLink ><LoginModal handleLogin = {this.props.handleLogin} /></NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink> <RegisterModal handleRegister = {this.props.handleRegister} /></NavLink>                    </NavItem>
+                            <NavLink > <RegisterModal handleRegister = {this.props.handleRegister} /></NavLink>                    </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
-
-                <Jumbotron class = 'jumbotron'>
-                        <Container>
-                            <h1>Welcome to WanderLog! </h1>
-                            <h5> Your personal online travel journal </h5><br></br>
-                            <p> Keeping track of your journal logs has never been so easy!<br></br> WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map. </p>
-
-                        </Container>
-                </Jumbotron>;
-
+            </div>
+                <div class='authContainer'>
+            <div class='jumbotron'>
+                <Jumbotron style={{opacity: '.2'}} >
+                        <h1 className="display-4">Welcome to Wander<br></br>Log!</h1>
+                        <p className="lead">Your personal online travel journal</p>
+                        <hr className="my-2" />
+                        <p>Keeping track of your journal logs has never been so easy!WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map.</p>
+                        <p className="lead">
+                        </p>
+                </Jumbotron>
+            </div>
                 <Carousel
                     activeIndex={activeIndex}
                     next={this.next}
@@ -126,6 +129,7 @@ class AuthContainer extends Component {
                     <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                     <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                 </Carousel>
+                </div>
         </div> 
         )
     }

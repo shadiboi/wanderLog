@@ -23,11 +23,11 @@ class MapContainer extends Component {
   }
 
   onMarkerClick = (props, marker, e) =>{
-  this.setState({
-    selectedPlace: props,
-    activeMarker: marker,
-    showingInfoWindow: true
-  });
+      this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
+      });
   }
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -64,11 +64,10 @@ class MapContainer extends Component {
      )
    })
    const style = {
-    width: '100vh',
-    height: '50vh',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    padding: "5%"
+    width: '90vw',
+    height: '70vh',
+    padding: '5%',
+    margin: 'auto'
   }
 
     return (

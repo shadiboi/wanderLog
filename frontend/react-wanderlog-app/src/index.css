@@ -14,25 +14,47 @@ code {
 }
 
 
-
 .entries div {
- display: block;
- margin: auto;
- padding: 1%;
+  display: block;
+  margin: auto;
+  padding: 1%;
 }
 
 .map {
-  display: block;
-  margin: auto;
-  margin-top: 5%;
+  margin-bottom: -1% ;
 }
 .allEntries div div{
   display: inline-block;
   margin: auto;
   padding: 1%;
  }
+.user-title {
+  margin-bottom: -1%;
+}
 
+.jumbotron {
+  padding: 10%;
+  margin: 0% 8% 0% 8%;
+  margin-top: 5%;
+}
 
+.explore-title {
+  padding: 2%;
+}
+
+.authContainer{
+  background-image: url('https://i.imgur.com/J7UaJxZ.jpg');
+  background-size: cover; 
+}
+
+.authNav div div div{
+  opacity: .2;
+  filter: alpha(opacity=30);
+}
+
+.authNav{
+  margin-bottom: -4%;
+}
 
 
 

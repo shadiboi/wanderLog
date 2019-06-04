@@ -19,7 +19,8 @@ class MainContainer extends Component {
             activeTab: '1',
             collapsed: true,
             currentUser: props.currentUser,
-            userEntries: []
+            userEntries: [],
+            allEntries:[]
         }
     }
 
@@ -37,11 +38,17 @@ class MainContainer extends Component {
     }
     componentDidMount = () => {
         this.getUserEntries();
+        //this.getAllEntries();
     }
 
     getEntries = (entries) => {
         this.setState({
           userEntries: entries
+        })
+    }
+    getAllEntries = (entries) => {
+        this.setState({
+          allEntries: entries
         })
     }
 
@@ -66,18 +73,18 @@ class MainContainer extends Component {
             <div>
         <div class='profile-nav'>
         <Navbar color="faded" light>
-                <NavbarBrand href="/" className="mr-auto">Wander Log</NavbarBrand>
+                <NavbarBrand className="mr-auto">Wander Log</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>
                         <NavItem>
-                            <NavLink  href="#"> <EditUserModal  editUser={this.editUser} allUsers = {this.state.allUsers} currentUser = {this.state.currentUser} deleteUser= {this.props.deleteUser}/></NavLink> 
+                            <NavLink   href="#"> <EditUserModal  editUser={this.editUser} allUsers = {this.state.allUsers} currentUser = {this.state.currentUser} deleteUser= {this.props.deleteUser}/></NavLink> 
                         </NavItem>
                         <NavItem>
-                            <NavLink href="www.google.com/flights" >Fly</NavLink>
+                            <a  style={{textDecoration: 'none', color: 'grey'}} href="http://www.google.com/flights" target='_blank'>Fly </a>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={{textDecoration: 'none'}} href=""onClick= {this.logout}>Logout</NavLink> 
+                            <NavLink style={{textDecoration: 'none', color: 'grey'}} href=""onClick= {this.logout}>Logout</NavLink> 
                         </NavItem>
                         </Nav>
                     </Collapse>
@@ -114,7 +121,7 @@ class MainContainer extends Component {
         <Row>
             <Col sm="12">
                 <div class='entries'>
-                    <EntriesContainer  getEntries = {this.getEntries} currentUser = {this.props.currentUser}/>
+                    <EntriesContainer getAllEntries={this.getAllEntries} getEntries = {this.getEntries} currentUser = {this.props.currentUser}/>
                 </div>
             <footer>@WanderLog</footer>
             </Col>
@@ -124,15 +131,15 @@ class MainContainer extends Component {
                 <div class='map'>
                     <MapContainer userEntries= {this.state.userEntries} currentUser = {this.props.currentUser}/>
                 </div>
-             <footer>@WanderLog</footer>
         </TabPane>
         <TabPane style={{background: '#EFEFEF'}} tabId="3">
                 <div class='allEntries'>
-                    <ExploreContainer userEntries= {this.state.userEntries}/>     
+                    <ExploreContainer allEntries = {this.state.allEntries} getAllEntries = {this.getAllEntries} userEntries= {this.state.userEntries}/>     
                 </div>
              <footer>@WanderLog</footer>
         </TabPane>
         </TabContent>
+        
             </div>
         )
     }

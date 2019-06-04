@@ -123,7 +123,7 @@ editUser = async () => {
          
         :
           
-             <MainContainer  deleteUser={this.deleteUser}getEntries = {this.getEntries} currentUser = {this.state.currentUser}/>
+             <MainContainer  deleteUser={this.deleteUser} getEntries = {this.getEntries} currentUser = {this.state.currentUser}/>
           
         }
 
