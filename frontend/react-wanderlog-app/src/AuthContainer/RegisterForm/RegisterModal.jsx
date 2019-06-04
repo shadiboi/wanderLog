@@ -40,11 +40,11 @@ class RegisterModal extends React.Component {
           <ModalHeader toggle={this.toggle}>Register</ModalHeader>
           <ModalBody>
           <form onSubmit={this.handleSubmit}>
-            Username: <input onChange={this.handleChange} type="text" name="username"/>
+            Username: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="text" name="username"/>
             <br></br>  <br></br>
-            Password: <input onChange={this.handleChange} type="password" name="password"/>
+            Password: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="password" name="password"/>
             <br></br>  <br></br>
-            Email: <input onChange={this.handleChange} type="email" name="email"/>
+            Email: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="email" name="email"/>
             <br></br>  <br></br>
             <Button type = 'submit'color="primary" onClick={this.toggle}>Register</Button>  </form>         
             </ModalBody>

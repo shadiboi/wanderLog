@@ -187,7 +187,7 @@ class EntriesContainer extends Component {
                     <Col sm='6'>
                         <CardGroup>
                             <Card class= 'entries-card'>
-                                <CardImg top width="100%" src={entry.photo} alt="No photo available. Click 'Edit Entry' add" />
+                                <CardImg top width="100%" src={entry.photo} alt="No photo was uploaded." />
                                 <h2>{entry.title}</h2>
                                 <h6>{entry.date}</h6>
                                 <CardText>{entry.description}</CardText>

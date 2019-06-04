@@ -117,7 +117,7 @@ class MainContainer extends Component {
         </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
-        <TabPane style={{background: '#EFEFEF'}} tabId="1">
+        <TabPane tabId="1">
         <Row>
             <Col sm="12">
                 <div class='entries'>
@@ -132,7 +132,7 @@ class MainContainer extends Component {
                     <MapContainer userEntries= {this.state.userEntries} currentUser = {this.props.currentUser}/>
                 </div>
         </TabPane>
-        <TabPane style={{background: '#EFEFEF'}} tabId="3">
+        <TabPane tabId="3">
                 <div class='allEntries'>
                     <ExploreContainer allEntries = {this.state.allEntries} getAllEntries = {this.getAllEntries} userEntries= {this.state.userEntries}/>     
                 </div>

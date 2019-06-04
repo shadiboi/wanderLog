@@ -64,11 +64,9 @@ return (
         <FormGroup row>
           <Label  sm={4}>Description:</Label>
           <Col for="exampleText" sm={10}>
-            <Input style={{ 
-              height: '150px',
-              border: '2px solid #ccc',
-              boxSizing: 'border-box',
-              display: 'inline-block',
+            <textarea style={{ 
+              width: '100%',
+              border: '1px solid'
             }} onChange={this.handleChange} type="text" name="description" placeholder="What did you do today?" />
           </Col>
         </FormGroup>
@@ -78,21 +76,13 @@ return (
             <Input onChange={this.handleChange} type="text" name="photo" />
           </Col>
         </FormGroup>
-        {/* <FormGroup row>
-          <Label for="exampleSelect" sm={2}>Public:</Label>
-          <Col sm={10}>
-            <Input onSelect={this.handleChange} type="select" name="public">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-            </Input>
-          </Col>
-        </FormGroup> */}
          <FormGroup check>
           <Label check>
             <Input onChange={this.handleChange} type="checkbox" name="public"/>{' '}
             Public
           </Label>
         </FormGroup>
+        <br></br>
         <FormGroup check row>
           <Col sm={{ size: 10, offset: 2 }}>
            <Button type = 'submit'color="primary" onClick={this.toggle}>Create Entry</Button>

@@ -20,13 +20,24 @@ code {
   padding: 1%;
 }
 
-.map {
+.map  {
   margin-bottom: -1% ;
 }
-.allEntries div div{
+.allEntries div{
   display: inline-block;
   margin: auto;
   padding: 1%;
+ }
+ .allEntries {
+  background-image: url('https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80');  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; 
+ }
+ .entries {
+  background-image: url('https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80');  
+  background-size: relative;
+  background-position: center; 
  }
 .user-title {
   margin-bottom: -1%;
@@ -42,18 +53,23 @@ code {
   padding: 2%;
 }
 
-.authContainer{
+.authContainer {
   background-image: url('https://i.imgur.com/J7UaJxZ.jpg');
+  background-repeat: no-repeat;
   background-size: cover; 
 }
 
 .authNav div div div{
-  opacity: .2;
-  filter: alpha(opacity=30);
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 
 .authNav{
   margin-bottom: -4%;
+}
+
+.authCarousel div{
+  padding: 5%;
 }
 
 
