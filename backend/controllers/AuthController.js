@@ -3,8 +3,6 @@ const router = express.Router();
 const User   = require('../models/User');
 const bcrypt = require('bcryptjs');
 
-
-
 //Login
 router.post('/login', async (req, res) => {
     try{
@@ -19,8 +17,6 @@ router.post('/login', async (req, res) => {
                 })         
             }
         }
-        //console.log(req.session, 'sessions here<<<<<<<<<<<,')
-
         res.send({
             status: 500,
             data: "No such user or password"
@@ -33,10 +29,8 @@ router.post('/login', async (req, res) => {
 
 //Logout
 router.post('/logout', (req, res) => {
-
     req.session.logged = false;
     req.session.destroy;
-
 })
 
 module.exports = router;

@@ -28,12 +28,10 @@ router.post("/", async (req, res)=>{
 router.get('/current', async (req, res, next) => {
     try  {
        const foundUser = await User.findById(req.session.username);
-        //console.log(foundUser)
        res.json({
          status: 200,
          data: foundUser
        });
-
      } catch (err){
        res.send(err);
      }
@@ -43,23 +41,17 @@ router.get('/current', async (req, res, next) => {
 router.get('/all', async (req,res,next) => {
   try {
     const allUsers = await User.find({});
-    //console.log(allUsers, 'all usersssssssssssssss')
     res.json({
       status: 200,
       data: allUsers
     });
-
   } catch (err){
     res.send(err)
   }
-
 })
 
-
 //Delete 
-
 router.delete('/:id', async (req, res) => {
-  console.log('deleting user')
     try{
         const deletedUser = await User.findByIdAndDelete(req.params.id)
         const deletedEntries = await Entries.deleteMany({ owner: { $in: [ req.params.id]}})
@@ -68,20 +60,10 @@ router.delete('/:id', async (req, res) => {
             status: 200,
             data: deletedUser
         })
-
     } catch (err) {
         res.send(err)
     }
 })
-
-
-
-  
-
-
-
-
-
 
 module.exports = router;
 
