@@ -35,18 +35,18 @@ class RegisterModal extends React.Component {
   render() {
     return (
       <div>
-        <Link  style={{textDecoration: 'none', letterSpacing: '1px', color:'grey'}} onClick={this.toggle}>{this.props.buttonLabel}REGISTER</Link>
+        <Link  style={{textDecoration: 'none', letterSpacing: '2px', color:'white', fontSize: '17px'}} onClick={this.toggle}>{this.props.buttonLabel}REGISTER</Link>
         <Modal  style={{maxWidth: '50vh'}}  isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Register</ModalHeader>
           <ModalBody>
-          <form onSubmit={this.handleSubmit}>
-            Username: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="text" name="username"/>
-            <br></br>  <br></br>
-            Password: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="password" name="password"/>
-            <br></br>  <br></br>
-            Email: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="email" name="email"/>
-            <br></br>  <br></br>
-            <Button type = 'submit'color="primary" onClick={this.toggle}>Register</Button>  </form>         
+               <form onSubmit={this.handleSubmit}>
+                Username: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="text" name="username"/>
+                <br></br>  <br></br>
+                Password: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="password" name="password"/>
+                <br></br>  <br></br>
+                Email: <input style={{ border: '1px solid #ccc'}} onChange={this.handleChange} type="email" name="email"/>
+                <br></br>  <br></br>
+                <Button type = 'submit'color="primary" onClick={this.toggle}>Register</Button>  </form>         
             </ModalBody>
             
         </Modal>

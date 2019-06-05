@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Jumbotron, Container ,Button} from 'reactstrap';
+import { Jumbotron} from 'reactstrap';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import {
   Carousel,
@@ -15,15 +15,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const items = [
     {
-      src: 'http://www.fodors.com/images/itineraries/prague-public-square.jpg',
+      src: 'https://i.imgur.com/6ax5KuO.png',
 
     },
     {
-      src: 'https://travel.savacations.com/wp-content/uploads/2016/10/Destinations-Brazil-Tours-Travel24-450x300.jpg',
+      src: 'https://i.imgur.com/bMfXBeV.png',
   
     },
     {
-      src: 'https://4.bp.blogspot.com/-Hj6PWHpVaDA/UQiYUwPzhmI/AAAAAAAADJY/0LvpnvkjxYg/s400/%2528Philippines%2529+%25E2%2580%2593Travel+to+Palawan+4.jpg',
+      src: 'https://i.imgur.com/yKB94py.png',
     }
 ];
 
@@ -92,15 +92,16 @@ class AuthContainer extends Component {
          <div class='authContainer'>
             <div class='authNav' >
              <Navbar style={{margin: 'auto'}} color="faded" light>
-                <NavbarBrand href="/" className="mr-auto">Wander Log</NavbarBrand>
+                <NavbarBrand style={{fontSize: '200%'}} href="/" className="mr-auto">Wander Log</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>
                         <NavItem>
-                            <NavLink ><LoginModal handleLogin = {this.props.handleLogin} /></NavLink>
+                          <LoginModal handleLogin = {this.props.handleLogin} />
                         </NavItem>
                         <NavItem>
-                            <NavLink > <RegisterModal handleRegister = {this.props.handleRegister} /></NavLink>                    </NavItem>
+                         <RegisterModal handleRegister = {this.props.handleRegister} />
+                        </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -114,7 +115,7 @@ class AuthContainer extends Component {
                         <h1 className="display-4">Welcome to Wander<br></br>Log!</h1>
                         <p className="lead">Your personal online travel journal</p>
                         <hr className="my-2" />
-                        <p>Keeping track of your journal logs has never been so easy!WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map.</p>
+                        <p  className="lead">Keeping track of your journal logs has never been so easy! WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map.</p>
                         <p className="lead">
                         </p>
                 </Jumbotron>
@@ -129,7 +130,7 @@ class AuthContainer extends Component {
                     <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                     <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                 </Carousel>
-            </div>    
+            </div> 
         </div>
    
         )

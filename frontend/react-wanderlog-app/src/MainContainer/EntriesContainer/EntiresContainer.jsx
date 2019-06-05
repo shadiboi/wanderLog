@@ -14,8 +14,6 @@ class EntriesContainer extends Component {
             currentUser: props.currentUser,
             allEntries: [],
             userEntries: [], 
-            // editedEntriesArray: [],
-            // allEditedEntriesArray: [],
             latitude: '',
             longitude: '',
             entryToEdit: {
@@ -52,7 +50,6 @@ class EntriesContainer extends Component {
             credentials: 'include'
           })
           const parsedResponse = await allEntries.json();
-
           if(parsedResponse.status === 200){
             await this.setState({
               allEntries: parsedResponse.data
@@ -60,6 +57,7 @@ class EntriesContainer extends Component {
            }  
            this.props.getAllEntries(this.state.allEntries)
     }
+
     getLocation = async () => {
         await navigator.geolocation.getCurrentPosition((locationInfo) => {
             this.setState({
@@ -68,6 +66,7 @@ class EntriesContainer extends Component {
             })
         })
     }
+
     getUserEntries = async () => {
         const userEntries = await fetch('http://localhost:9000/entries/' + this.props.currentUser._id, {
             method: 'GET',
@@ -79,14 +78,13 @@ class EntriesContainer extends Component {
               userEntries: parsedResponse.data
             })
            } 
-           this.props.getEntries(this.state.userEntries)
+        this.props.getEntries(this.state.userEntries)
     }
    
     newEntry = async (formData) => {
             formData.latitude = this.state.latitude
             formData.longitude = this.state.longitude
             formData.owner = this.props.currentUser
-            console.log(formData, "FORM DATA<<<<<<<<<<<<<<<<<<")
             const newEntry = await fetch("http://localhost:9000/entries", {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -101,17 +99,16 @@ class EntriesContainer extends Component {
                     userEntries: [...this.state.userEntries, parsedResponse.data],
                     allEntries: [...this.state.allEntries, parsedResponse.data]
                 })
+            //Allows entries to update in maps/explore after new is create. 
+            //Same logic for delete/edit
             this.getUserEntries();
             this.props.getAllEntries(this.state.allEntries)
-
         }
     }
  
 
     editEntry = async (entryToEdit)  => {
- 
         try {
-
         const editedResponse = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
             method: 'PUT',
             credentials: 'include',
@@ -120,7 +117,6 @@ class EntriesContainer extends Component {
             'Content-Type': 'application/json'
             }
         })
-        
         const parsedResponse = await editedResponse.json();
         const editedEntriesArray = this.state.userEntries.map((entry) => {
         if(entry._id === entryToEdit.id){
@@ -139,7 +135,6 @@ class EntriesContainer extends Component {
                 }
                 return entry
         });
-        console.log(editedEntriesArray)
         this.setState({
             userEntries: editedEntriesArray,
             allEntries: allEditedEntriesArray
@@ -151,18 +146,13 @@ class EntriesContainer extends Component {
         }
     }
 
-    deleteEntry = async (entryToEdit) => {
-        
+    deleteEntry = async (entryToEdit) => { 
         try {
-            console.log(this.state)
             const deletedEntry = await fetch('http://localhost:9000/entries/' + entryToEdit.id, {
                 method: 'DELETE',
                 credentials: 'include'
             });
-            console.log(deletedEntry, 'deleted entryyyyyyyy')
             const deletedEntryJson = await deletedEntry.json();
-            console.log(deletedEntry)
-            console.log('---------DELETED ENTRY-----------------------')
             this.setState({
                 userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id),
                 allEntries: this.state.allEntries.filter((entry) => entry._id !== entryToEdit.id)
@@ -177,14 +167,13 @@ class EntriesContainer extends Component {
     }
        
     render(){
-
         const userEntries = this.state.userEntries.map((entry, i) => {
            
             return (
              
                 <div key = {entry._id}>
                 <Row>
-                    <Col sm='6'>
+                    <Col sm='9'>
                         <CardGroup>
                             <Card class= 'entries-card'>
                                 <CardImg top width="100%" src={entry.photo} alt="No photo was uploaded." />
@@ -199,31 +188,12 @@ class EntriesContainer extends Component {
                       
                 </div>
             )   
-        })
-    
-        const allEntries = this.state.allEntries.map((entries)=> {
-            return (
-            <div key = {entries._id}>
-            <Card>
-                <CardBody>
-                    <CardTitle>{entries.title} </CardTitle> 
-                    <CardText> 
-                    Lat:<li>  {entries.latitude} </li> 
-                    Long:<li>  {entries.longitude} </li>
-                    </CardText>
-                <Button/>
-            </CardBody>
-             </Card> 
-            </div>
-            )
-        })
-       
+        })    
         return(
             <div>
-               <h2 class='user-title' >{this.state.currentUser.username + "'s"+ ' Entries'}</h2>
                <NewEntryModal  currentUser = {this.props.currentUser} newEntry={this.newEntry}/>
-                    <UncontrolledAlert style={{width: '45%'}} color="danger">
-                        <h6 >Don't forget your daily log!</h6>
+                    <UncontrolledAlert style={{width: '55%', padding: '2%'}} color="danger">
+                        <h5 >Don't forget your daily log!</h5>
                      </UncontrolledAlert>
                <div className="entries-list">
                 {userEntries}

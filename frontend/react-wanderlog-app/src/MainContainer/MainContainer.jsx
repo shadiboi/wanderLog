@@ -38,7 +38,6 @@ class MainContainer extends Component {
     }
     componentDidMount = () => {
         this.getUserEntries();
-        //this.getAllEntries();
     }
 
     getEntries = (entries) => {
@@ -63,28 +62,25 @@ class MainContainer extends Component {
               userEntries: parsedResponse.data
             })
            } 
-           //this.props.getEntries(this.state.userEntries)
     }
     
-    render(){
-       console.log(this.state, "THIS STATE FORM MAIN")
-    
+    render(){    
         return(
-            <div>
+            <div class='main-container'>
         <div class='profile-nav'>
         <Navbar color="faded" light>
-                <NavbarBrand className="mr-auto">Wander Log</NavbarBrand>
+                <NavbarBrand style={{fontSize: '200%', color: 'white'}} Name="mr-auto">Wander Log</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav navbar>
                         <NavItem>
-                            <NavLink   href="#"> <EditUserModal  editUser={this.editUser} allUsers = {this.state.allUsers} currentUser = {this.state.currentUser} deleteUser= {this.props.deleteUser}/></NavLink> 
+                            <EditUserModal  editUser={this.editUser} allUsers = {this.state.allUsers} currentUser = {this.state.currentUser} deleteUser= {this.props.deleteUser}/>
                         </NavItem>
                         <NavItem>
-                            <a  style={{textDecoration: 'none', color: 'grey'}} href="http://www.google.com/flights" target='_blank'>Fly </a>
+                            <NavLink  style={{textDecoration: 'none', letterSpacing: '2px', color:'white', fontSize: '17px'}}  href="http://www.google.com/flights" target='_blank'>Fly </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink style={{textDecoration: 'none', color: 'grey'}} href=""onClick= {this.logout}>Logout</NavLink> 
+                            <NavLink style={{textDecoration: 'none', letterSpacing: '2px', color:'white', fontSize: '17px'}}  href=""onClick= {this.logout}>Logout</NavLink> 
                         </NavItem>
                         </Nav>
                     </Collapse>
@@ -98,7 +94,7 @@ class MainContainer extends Component {
             <NavLink
                 className={classnames({ active: this.state.activeTab === '1' })}
                 onClick={() => { this.toggle('1'); }}>
-                Entries
+                {this.state.currentUser.username}'s Journal
             </NavLink>
         </NavItem>
         <NavItem>
@@ -123,7 +119,7 @@ class MainContainer extends Component {
                 <div class='entries'>
                     <EntriesContainer getAllEntries={this.getAllEntries} getEntries = {this.getEntries} currentUser = {this.props.currentUser}/>
                 </div>
-            <footer>@WanderLog</footer>
+            <footer>@ 2019 WanderLog - ALL RIGHTS RESERVED</footer>
             </Col>
         </Row>
         </TabPane>
@@ -136,7 +132,7 @@ class MainContainer extends Component {
                 <div class='allEntries'>
                     <ExploreContainer allEntries = {this.state.allEntries} getAllEntries = {this.getAllEntries} userEntries= {this.state.userEntries}/>     
                 </div>
-             <footer>@WanderLog</footer>
+             <footer>@ 2019 WanderLog - ALL RIGHTS RESERVED</footer>
         </TabPane>
         </TabContent>
         

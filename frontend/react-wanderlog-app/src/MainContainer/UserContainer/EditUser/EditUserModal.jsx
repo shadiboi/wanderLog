@@ -45,7 +45,7 @@ class EditUserModal extends Component {
     render() {
       return (
         <div>
-          <Link style={{textDecoration: 'none', color: 'grey'}} onClick={this.toggle}>{this.props.buttonLabel}Edit Account</Link>
+          <Link style={{textDecoration: 'none', letterSpacing: '2px', color:'white', fontSize: '17px'}}  onClick={this.toggle}>{this.props.buttonLabel}Edit Account</Link>
           <Modal  style={{maxWidth: '50vh'}} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Edit Account</ModalHeader>
                 <ModalBody  >

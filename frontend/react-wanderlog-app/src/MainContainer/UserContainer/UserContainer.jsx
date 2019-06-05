@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
-import { Nav, NavItem, NavLink, Link } from 'reactstrap';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
+//CLASS NOT IN USE YET
 class User extends Component {
     constructor (props){
         super();
@@ -21,7 +17,7 @@ class User extends Component {
         this.getUserEntries();
     }
 
-    //WILL USE FOR PUBLIC ENTRIES SHOW BROWSE PAGE
+  
     getAllUsers = async () => {
         const allUsers = await fetch('http://localhost:9000/users/all', {
             credentials: 'include'
@@ -33,6 +29,7 @@ class User extends Component {
             })
         }  
     }
+
     getUserEntries = async () => {
         const userEntries = await fetch('http://localhost:9000/entries/' + this.props.currentUser._id, {
             method: 'GET',
@@ -47,8 +44,9 @@ class User extends Component {
 
     }
  
-
     render(){
+
+        //FOR TESTING
         const allUsers = this.state.allUsers.map((users)=> {
             return (
             <div key = {users._id}>
@@ -58,8 +56,6 @@ class User extends Component {
         })
         return(
             <div>
-              
-                <h1>  </h1>
               
             </div>
         )

@@ -14,8 +14,7 @@ class MapContainer extends Component {
         selectedPlace: {},
       }
     }
-
-
+    
   getEntries = (entries) => {
       this.setState({
         userEntries: entries
@@ -29,6 +28,7 @@ class MapContainer extends Component {
         showingInfoWindow: true
       });
   }
+
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -42,8 +42,7 @@ class MapContainer extends Component {
   render() {
 
     const {google} = this.props;
-
-   console.log(this.state.activeMarker.name)
+    //console.log(this.state.activeMarker.name)
     const entriesList = this.props.userEntries.map((entry) => {   
       
      return (
@@ -59,15 +58,15 @@ class MapContainer extends Component {
            scaledSize: new google.maps.Size(64,64)
          }}
        > 
-      </Marker>
-     
+      </Marker> 
      )
    })
    const style = {
     width: '90vw',
     height: '70vh',
     padding: '5%',
-    margin: 'auto'
+    margin: 'auto',
+    backgroundColor: 'grey'
   }
 
     return (
