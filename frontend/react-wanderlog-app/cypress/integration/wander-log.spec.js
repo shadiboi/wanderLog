@@ -9,7 +9,7 @@ describe('WanderLog', function() {
   it('Visit WanderLog & assert CSS class', function() {
     cy.visit('localhost:3000');
     cy.get('p.data-title').should('have.class', "data-title");
-
+    cy.percySnapshot();
   });
 
   //LOGIN

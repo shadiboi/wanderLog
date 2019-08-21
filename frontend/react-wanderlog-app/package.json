@@ -32,8 +32,8 @@
     ]
   },
   "devDependencies": {
+    "@percy/cypress": "^2.0.0",
     "cypress": "^3.4.1",
     "cypress-react-unit-test": "^2.4.3"
   }
-  
 }
