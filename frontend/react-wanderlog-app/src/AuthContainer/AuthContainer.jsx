@@ -113,7 +113,7 @@ class AuthContainer extends Component {
             </div>
         {/* <div  class='jumbotron'> */}
                <Jumbotron style={{ height: '30%', width: '80vw',margin: '4% 0% 0% 8%'}}  >
-                        <h1 className="display-4">Welcome to Wander<br></br>Log!</h1>
+                        <h1 className="display-4">Welcome to Wander<br></br>Log</h1>
                         <p className="lead data-title">Your personal online travel journal</p>
                         <hr className="my-2" />
                         <p  className="lead">Keeping track of your journal logs has never been so easy! WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map.</p>
