@@ -5,13 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class ExploreContainer extends Component {
 
     render(){
-        let allEntries = this.props.allEntries.filter((entries) => entries.public).map((entries, i)=> {            
+        let allEntries = this.props.allEntries.filter((entry) => entry.public === 'on').map((entries, i)=> { 
+           // console.log(1, entries)           ;
             return (
             <div key = {entries._id}>
             <Row>
                 <Col sm='7'>
                     <CardGroup>
-                        <Card class= 'entries-card'>
+                        <Card className= 'entries-card'>
                             <CardImg top width="100%" src={entries.photo} alt="No photo available. Click 'Edit Entry' add" />
                             <h2>{entries.title}</h2>
                             <h6>{entries.date}</h6>
@@ -29,7 +30,7 @@ class ExploreContainer extends Component {
 
         return(
             <div >
-              <h1 class='explore-title'>WanderLog Community</h1>
+              <h1 className='explore-title'>WanderLog Community</h1>
                {allEntries}
             </div>
         )

@@ -22,6 +22,8 @@ class MapContainer extends Component {
   }
 
   onMarkerClick = (props, marker, e) =>{
+    console.log(this.state.activeMarker, "active marker<<<<<<<<<<<<<<,")
+    console.log(marker, 'marker<<<<<<<<<<<<<<<<<');
       this.setState({
         selectedPlace: props,
         activeMarker: marker,
@@ -32,8 +34,7 @@ class MapContainer extends Component {
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
+        showingInfoWindow: false
       })
     }
   };
@@ -51,7 +52,7 @@ class MapContainer extends Component {
          name = {entry.title}
          date = {entry.date}
          description = {entry.description}
-         position = {{lng: entry.longitude, lat: entry.latitude}}
+         position = {{lng: entry.longitude + .1, lat: entry.latitude + .1}}
          icon = {{
            url: 'https://cdn3.iconfinder.com/data/icons/family-14/100/family-06-512.png',
            anchor: new google.maps.Point(32,32),

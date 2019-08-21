@@ -74,6 +74,7 @@ class AuthContainer extends Component {
     this.setState({ activeIndex: newIndex });
     }
     
+    
     render(){
         const { activeIndex } = this.state;
         const slides = items.map((item) => {
@@ -89,13 +90,13 @@ class AuthContainer extends Component {
             );
           });
         return(
-         <div class='authContainer'>
-            <div class='authNav' >
-             <Navbar style={{margin: 'auto'}} color="faded" light>
-                <NavbarBrand style={{fontSize: '200%'}} href="/" className="mr-auto">Wander Log</NavbarBrand>
-                <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-                    <Collapse isOpen={!this.state.collapsed} navbar>
-                        <Nav navbar>
+         <div className='authContainer'>
+            <div className='authNav' >
+             <Navbar   style={{margin: 'auto'}} color="faded" width="3vw"dark>
+                <NavbarBrand style={{fontSize: '200%'}} href="/" className="mr-auto" className='wl-logo'>Wander Log</NavbarBrand>
+                <NavbarToggler   onClick={this.toggleNavbar} className="mr-2" />
+                    <Collapse style={{color: "white"}}isOpen={!this.state.collapsed} navbar>
+                        <Nav  navbar>
                         <NavItem>
                           <LoginModal handleLogin = {this.props.handleLogin} />
                         </NavItem>
@@ -110,17 +111,17 @@ class AuthContainer extends Component {
                 <div>
               <h1></h1>
             </div>
-        <div  class='jumbotron'>
-               <Jumbotron  >
+        {/* <div  class='jumbotron'> */}
+               <Jumbotron style={{ height: '30%', width: '80vw',margin: '4% 0% 0% 8%'}}  >
                         <h1 className="display-4">Welcome to Wander<br></br>Log!</h1>
-                        <p className="lead">Your personal online travel journal</p>
+                        <p className="lead data-title">Your personal online travel journal</p>
                         <hr className="my-2" />
                         <p  className="lead">Keeping track of your journal logs has never been so easy! WanderLog allows you to keep track of your travels logs through text, photo, and even an interactive world map.</p>
                         <p className="lead">
                         </p>
                 </Jumbotron>
-         </div>
-            <div class='authCarousel'>
+         {/* </div> */}
+            <div className='authCarousel'>
                 <Carousel
                     activeIndex={activeIndex}
                     next={this.next}

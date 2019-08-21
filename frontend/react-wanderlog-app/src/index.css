@@ -36,15 +36,15 @@ a:hover {
   color: rgb(250, 249, 249);
   font-size: 250%;
 }
-.nav-link{
-border-bottom: 20%;
-}
+
 
 .jumbotron {
   padding: 10%;
   margin: 0% 8% 0% 8%;
   margin-top: 5%;
   opacity: 0.6;
+
+
 }
 .jumbotron div {
   margin: 0% 8% 0% 8%;
@@ -79,11 +79,26 @@ border-bottom: 20%;
 }
 
 .main-container {
+  background-position: center;
+  background-size: cover;
+}
+body {
   background-image: url('https://images.unsplash.com/photo-1529000920031-b8f994d2eb27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80');
   background-position: center;
   background-size: cover;
- 
 }
+
+.mr-auto {
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.wl-logo {
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+/* .navbar-toggler-icon div{
+  height: 300vh;
+} */
 
 
 

@@ -65,7 +65,7 @@ class EntriesContainer extends Component {
                 longitude: locationInfo.coords.longitude
             })
         })
-    }
+    };
 
     getUserEntries = async () => {
         const userEntries = await fetch('http://localhost:9000/entries/' + this.props.currentUser._id, {
@@ -99,10 +99,18 @@ class EntriesContainer extends Component {
                     userEntries: [...this.state.userEntries, parsedResponse.data],
                     allEntries: [...this.state.allEntries, parsedResponse.data]
                 })
+
             //Allows entries to update in maps/explore after new is create. 
             //Same logic for delete/edit
             this.getUserEntries();
             this.props.getAllEntries(this.state.allEntries)
+            if (formData){
+                formData.public = 'off';
+                formData.date = null;
+                formData.title = '';
+                formData.description = '';
+                formData.photo = '';
+            }
         }
     }
  
@@ -133,7 +141,7 @@ class EntriesContainer extends Component {
                     entry = parsedResponse.data;
     
                 }
-                return entry
+                return entry;
         });
         this.setState({
             userEntries: editedEntriesArray,
@@ -156,15 +164,15 @@ class EntriesContainer extends Component {
             this.setState({
                 userEntries: this.state.userEntries.filter((entry) => entry._id !== entryToEdit.id),
                 allEntries: this.state.allEntries.filter((entry) => entry._id !== entryToEdit.id)
-            })
+            });
             this.getUserEntries();
             this.getAllEntries();
             
         } catch (err){
-            console.log(err)
+            console.log(err);
         }    
     
-    }
+    };
        
     render(){
         const userEntries = this.state.userEntries.map((entry, i) => {
